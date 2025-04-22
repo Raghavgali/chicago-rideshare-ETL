@@ -22,6 +22,26 @@ It includes:
 
 ---
 
+## 📐 Architecture Overview
+
+Here's a simplified architecture of the pipeline:
+
+```mermaid
+graph TD
+    A[Chicago API] --> B[Local Extraction & Cleaning]
+    B --> C[S3 Bucket (Processed Data)]
+    C --> D[Glue Crawler]
+    D --> E[Athena Query Engine]
+    E --> F[Streamlit Dashboard]
+```
+
+- The raw TNP trip data is pulled from the public API.
+- After local cleaning and preprocessing, the data is uploaded to AWS S3.
+- AWS Glue crawls the data and makes it queryable through Athena.
+- Streamlit visualizes the final query results as interactive dashboards.
+
+---
+
 ## 📊 Visual Insights
 
 The dashboard includes:
@@ -29,7 +49,6 @@ The dashboard includes:
 - 💳 Average trip cost trend by weekday
 - 🚘 Average trip distance & duration per day
 - 📍 Top pickup and dropoff locations (Map)
-- 👥 Shared vs. solo trip breakdown
 - 🧾 Fare structure: fare vs tip vs extra charges
 
 ---
@@ -47,10 +66,9 @@ The dashboard includes:
 
 ```
 chicago-rideshare-etl/
-├── data/                      # Raw and processed CSVs (gitignored)
+├── data/athena-query-results                     # Raw and processed CSVs (gitignored)
 ├── streamlit_app.py          # Streamlit dashboard
 ├── requirements.txt          # App dependencies
-├── assets/demo.gif           # Dashboard preview animation
 └── README.md                 # Project overview
 ```
 
