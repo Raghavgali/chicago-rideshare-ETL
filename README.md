@@ -29,7 +29,7 @@ Here's a simplified architecture of the pipeline:
 ```mermaid
 graph TD
     A[Chicago API] --> B[Local Extraction & Cleaning]
-    B --> C[S3 Bucket (Processed Data)]
+    B --> C["S3 Bucket: Processed Data"]
     C --> D[Glue Crawler]
     D --> E[Athena Query Engine]
     E --> F[Streamlit Dashboard]
